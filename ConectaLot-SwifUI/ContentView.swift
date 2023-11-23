@@ -17,28 +17,22 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            if isLoading {
-                ZStack{
-                    Color("conectablue")
-                        .edgesIgnoringSafeArea(.all)
-                       
-                    LottieView(isEnded: $isLoading)
-//                        .opacity(0.5)
-                }
-                
-                
-            } else {
-                WebView(htmlString: "", url: URL(string: urlString)!)
-                    .scaleEffect(scale)
-                    .gesture(
-                        MagnificationGesture()
-                            .onChanged { scale in
-                                self.scale = 1.0
-                            }
-                    )
-            }
+            
+            LottieView(isEnded: $isLoading)
+                .opacity(isLoading ? 1 : 0)
+            
+            WebView(htmlString: "", url: URL(string: urlString)!)
+                .scaleEffect(scale)
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged { scale in
+                            self.scale = 1.0
+                        }
+                )
+                .opacity(isLoading ? 0 : 1)
         }
         .ignoresSafeArea()
+        .background(Color(uiColor: UIColor(named: "conectablue")!))
         .onAppear {
             self.isLoading = true
         }
