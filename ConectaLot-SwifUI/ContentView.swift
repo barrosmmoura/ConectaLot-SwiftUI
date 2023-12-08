@@ -21,14 +21,17 @@ struct ContentView: View {
 
             LottieView(isEnded: $isLoading)
                 .opacity(isLoading ? 1 : 0)
+                .background(Color(uiColor: UIColor(named: "conectablue")!))
 
 
             WebView(htmlString: "", url: URL(string: urlString)!, isError: $isConnected)
+                .background(Color(uiColor: UIColor(named: "conectabg")!))
                 .opacity(isLoading ? 0 : 1)
 
+
         }
-        .ignoresSafeArea()
-        .background(Color(uiColor: UIColor(named: "conectablue")!))
+//        .ignoresSafeArea()
+//        .background(Color(uiColor: UIColor(named: "conectablue")!))
         .onAppear {
             self.isLoading = true
         }
